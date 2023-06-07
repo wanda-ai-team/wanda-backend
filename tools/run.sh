@@ -1,0 +1,1 @@
+flask --app app/__init__.py --debug run
