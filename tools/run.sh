@@ -1,1 +1,1 @@
-flask --app app/__init__.py --debug run
+flask --app application.py --debug run
