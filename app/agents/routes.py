@@ -1,5 +1,6 @@
 import os
 import openai
+from agents.textAgents.IdealizationAgent import IdealizationAgent
 from app.agents import bp
 from flask import request
 from langchain.prompts import PromptTemplate
@@ -27,22 +28,8 @@ def place(place="Berlin"):
 def ideas():
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
-        llm = ChatOpenAI(temperature=0.0)
-        math_llm = OpenAI(temperature=0.0)
-        tools = load_tools(
-            ["human", "llm-math"], 
-            llm=math_llm,
-        )
-
-        agent_chain = initialize_agent(
-            tools,
-            llm,
-            agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-            verbose=True,
-        )
-
-        answer = agent_chain.run("Give me 3 ideas to create a new twitter thread on the topics on")
-
+        agent = IdealizationAgent("IdealizationAgent")
+        answer = agent.main()
         return answer
     else:
         return 'Content-Type not supported!'
