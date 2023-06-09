@@ -23,5 +23,5 @@ class IdeationAgent(Agent):
         verbose=True,
     )
 
-    answer = agent_chain.run("Give me 3 ideas to create a new twitter thread on the following topic: " + userPrompt + "\n\n")
+    answer = agent_chain.run("Give me 3 ideas to create a new twitter thread on the following topic: " + userPrompt)
     return answer
