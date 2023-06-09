@@ -1,4 +1,8 @@
-from flask import Blueprint
+from application import application
 
-bp = Blueprint('agents', __name__)
-from app.agents import routes
+@application.get("/books")
+def get_books():
+    # code to return some books
+    return {"message": "books"}
+
+from app.agents.routes import * 
