@@ -5,8 +5,6 @@ from fastapi.responses import PlainTextResponse, HTMLResponse, FileResponse
 import uvicorn  # optional if you run it directly from terminal
 
 application = app = FastAPI()
-application.debug = True
-
 
 # Initialize Flask extensions here
 
