@@ -29,4 +29,4 @@ if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
     application.debug = True
-    uvicorn.run("application:application", host="127.0.0.1", port=5000)
+    uvicorn.run("application:application")
