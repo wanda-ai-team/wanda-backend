@@ -29,4 +29,5 @@ class IdeationAgent(Agent):
         func=search.run
     )
     answer = tool.run("Give me 3 ideas to create a new twitter thread on the following topic: " + userPrompt)
+
     return answer
