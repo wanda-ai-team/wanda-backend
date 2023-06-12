@@ -1,10 +1,33 @@
 import os
 import openai
 from agents.textAgents.IdeationAgent import IdeationAgent
-from app.agents import bp
 from flask import request
+from application import application
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+class AgentRequest(BaseModel):
+    userPrompt: str
+    systemPrompt: str
+    config: str
+
+
+@application.get("/agents/ideasT")
+def ideasT():
+    agent = IdeationAgent("IdeationAgent")
+    answer = agent.main("ai", "ai", "ai")
+    return answer
+    
+@application.post("/agents/ideas")
+def ideas(agentRequest: AgentRequest):
+    agentRequest_dict = agentRequest.dict()
+    print(agentRequest_dict)
+    agent = IdeationAgent("IdeationAgent")
+    answer = agent.main(agentRequest.userPrompt, agentRequest.systemPrompt, agentRequest.config)
+    return answer
+
 
 
 # @bp.route("/<place>")
@@ -19,29 +42,4 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 #     print(answer)
 #     return answer
 
-@bp.route("/ideasT")
-def ideasT():
-    agent = IdeationAgent("IdeationAgent")
-    answer = agent.main()
-    return answer
-    
-@bp.route("/ideas", methods=['POST'])
-def ideas():
-    content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
-        request_data = request.get_json()
-        if("userPrompt" not in request_data or "systemPrompt" not in request_data or "config" not in request_data):
-            return "There are missing parameters from the request!"
-        
-        if(not str(request_data['userPrompt']) or not str(request_data['systemPrompt'])):
-            return "userPrompt and systemPrompt must be strings!"
 
-        userPrompt = request_data['userPrompt']
-        systemPrompt = request_data['systemPrompt']
-        config = request_data['config']
-
-        agent = IdeationAgent("IdeationAgent")
-        answer = agent.main(userPrompt, systemPrompt, config)
-        return answer
-    else:
-        return 'Content-Type not supported!'

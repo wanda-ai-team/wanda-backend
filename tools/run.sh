@@ -1,1 +1,1 @@
-flask --app application.py --debug run
+uvicorn application:application --reload

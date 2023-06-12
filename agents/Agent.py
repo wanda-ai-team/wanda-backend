@@ -10,4 +10,4 @@ class Agent(ABC):
 
     @abstractmethod
     def main(self):
-        print("attack")
+        print("agent")

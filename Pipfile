@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 langchain = "*"
 openai = "*"
 python-dotenv = "*"
 awsebcli = "*"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
 google-api-python-client = "*"
 
 [dev-packages]
