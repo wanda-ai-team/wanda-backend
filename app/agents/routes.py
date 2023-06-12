@@ -16,6 +16,7 @@ class AgentRequest(BaseModel):
 
 @application.get("/agents/ideasT")
 def ideasT():
+    
     agent = IdeationAgent("IdeationAgent")
     answer = agent.main("ai", "ai", "ai")
     return answer
