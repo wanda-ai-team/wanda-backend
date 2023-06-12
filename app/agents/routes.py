@@ -10,7 +10,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class AgentRequest(BaseModel):
     userPrompt: str
-    systemPrompt: str | None = None
+    systemPrompt: str
     config: str
 
 
