@@ -2,7 +2,6 @@ from flask import Flask
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import PlainTextResponse, HTMLResponse, FileResponse
-import random   # needed for generating a random number for an API
 import uvicorn  # optional if you run it directly from terminal
 
 application = app = FastAPI()
@@ -29,4 +28,4 @@ if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
     application.debug = True
-    uvicorn.run("application:application")
+    uvicorn.run(application)
