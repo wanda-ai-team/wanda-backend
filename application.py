@@ -1,4 +1,3 @@
-from flask import Flask
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import PlainTextResponse, HTMLResponse, FileResponse
@@ -7,8 +6,6 @@ from app.main.routes import mainRouter
 from app.agents.routes import agentsRouter
 
 application = app = FastAPI()
-
-# Initialize Flask extensions here
 
 # Register blueprints here
 # from app.agents import bp as agents_bp

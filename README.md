@@ -1,6 +1,6 @@
 # Backend
 
-The backend API is a python flask project that is deployed in AWS
+The backend API is a python fastapi project that is deployed in AWS
 
 [https://github.com/wanda-ai-team/wanda-backend](https://github.com/wanda-ai-team/wanda-backend)
 
@@ -24,7 +24,7 @@ The backend API is a python flask project that is deployed in AWS
 
 This a backend API project.
 
-It is built on top of Flask. [https://flask.palletsprojects.com/en/2.3.x/](https://flask.palletsprojects.com/en/2.3.x/)
+It is built on top of fastapi. [https://flask.palletsprojects.com/en/2.3.x/](https://flask.palletsprojects.com/en/2.3.x/)
 
 It uses the blueprint concept for the structure of the endpoints
 
