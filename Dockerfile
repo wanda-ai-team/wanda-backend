@@ -1,14 +1,14 @@
 FROM python:3.10
 # 
-WORKDIR /wanda-baclend
+WORKDIR /wanda-backend
 # 
-COPY ./requirements.txt /wanda-baclend/requirements.txt
+COPY ./requirements.txt /wanda-backend/requirements.txt
 # 
-RUN pip install --no-cache-dir --upgrade -r /wanda-baclend/requirements.txt 
+RUN pip install --no-cache-dir --upgrade -r /wanda-backend/requirements.txt 
 # 
-COPY ./agents /code/agents
-COPY ./app /code/app
-COPY ./tools /code/tools
-COPY ./application.py /code/application.py
+COPY ./agents /wanda-backend/agents
+COPY ./app /wanda-backend/app
+COPY ./tools /wanda-backend/tools
+COPY ./application.py /wanda-backend/application.py
 #
 CMD ["uvicorn", "application:application", "--host", "0.0.0.0"]
