@@ -1,10 +1,10 @@
 import os
 import openai
 from agents.textAgents.IdeationAgent import IdeationAgent
-from flask import request
-from application import application
-from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi import APIRouter
+
+agentsRouter = APIRouter()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -14,13 +14,17 @@ class AgentRequest(BaseModel):
     config: str
 
 
-@application.get("/agents/ideasT")
+@agentsRouter.get("/test")
+def test():
+    return 'answer'
+
+@agentsRouter.get("/ideasT")
 def ideasT():
     agent = IdeationAgent("IdeationAgent")
     answer = agent.main("ai", "ai", "ai")
     return answer
     
-@application.post("/agents/ideas")
+@agentsRouter.post("/ideas")
 def ideas(agentRequest: AgentRequest):
     agentRequest_dict = agentRequest.dict()
     print(agentRequest_dict)

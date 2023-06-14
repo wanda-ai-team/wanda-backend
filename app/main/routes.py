@@ -1,6 +1,7 @@
-from app.main import bp
+from fastapi import APIRouter
 
+mainRouter = APIRouter()
 
-@bp.route('/')
+@mainRouter.get('/')
 def index():
     return 'This is The Main Blueprint'

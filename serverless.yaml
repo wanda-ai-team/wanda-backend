@@ -1,0 +1,48 @@
+service: wanda-backend-serverless
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: python3.10
+  region: eu-central-1
+  stage: ${opt:stage, "dev"}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    layer:
+      name: wanda-backend-serverless-layer
+      description: Wanda Backend application layer
+      compatibleRuntimes:
+        - python3.10
+
+functions:
+  app:
+    package:
+      include:
+        - "application.py"
+        - "app"
+        - "tools"
+        - "agents"
+      exclude:
+        - "requirements.txt"
+        - "package.json"
+        - "package-lock.json"
+        - ".serverless/**"
+        - ".virtualenv/**"
+        - "node_modules/**"
+
+    handler: application.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          method: any
+          path: /{proxy+}

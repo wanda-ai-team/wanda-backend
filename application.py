@@ -3,6 +3,9 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import PlainTextResponse, HTMLResponse, FileResponse
 import uvicorn  # optional if you run it directly from terminal
+from app.main.routes import mainRouter
+from app.agents.routes import agentsRouter
+from mangum import Mangum
 
 application = app = FastAPI()
 
@@ -19,11 +22,13 @@ application = app = FastAPI()
 async def hello():
     return "Hello World!"
 
-from app.agents import *
+application.include_router(agentsRouter, prefix="/agents")
+application.include_router(mainRouter, prefix="/main")
+handler = Mangum(app=application)
 
 # run the app.
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    application.debug = True
-    uvicorn.run(application)
+    # application.debug = True
+    # uvicorn.run(application)

@@ -11,6 +11,7 @@ awsebcli = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 google-api-python-client = "*"
+mangum = "*"
 
 [dev-packages]
 
