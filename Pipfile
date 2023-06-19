@@ -11,6 +11,9 @@ awsebcli = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 google-api-python-client = "*"
+tiktoken = "*"
+duckduckgo-search = "*"
+wikipedia = "*"
 
 [dev-packages]
 

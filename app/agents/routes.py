@@ -1,36 +1,36 @@
 import os
 import openai
-from agents.textAgents.IdeationAgent import IdeationAgent
-from pydantic import BaseModel
+from llm.RequestModels import AgentRequest
+from llm.agents.textAgents.IdeationAgent import IdeationAgent
+from llm.agents.textAgents.ResearchAgent import ResearchAgent
 from fastapi import APIRouter
 
 agentsRouter = APIRouter()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-class AgentRequest(BaseModel):
-    userPrompt: str
-    systemPrompt: str
-    config: str
 
 
 @agentsRouter.get("/test")
 def test():
     return 'answer'
-
-@agentsRouter.get("/ideasT")
-def ideasT():
-    agent = IdeationAgent("IdeationAgent")
-    answer = agent.main("ai", "ai", "ai")
-    return answer
     
 @agentsRouter.post("/ideas")
 def ideas(agentRequest: AgentRequest):
     agentRequest_dict = agentRequest.dict()
     print(agentRequest_dict)
-    agent = IdeationAgent("IdeationAgent")
+    agent = IdeationAgent()
     answer = agent.main(agentRequest.userPrompt, agentRequest.systemPrompt, agentRequest.config)
     return answer
+    
+@agentsRouter.post("/research")
+def ideas(agentRequest: AgentRequest):
+    agentRequest_dict = agentRequest.dict()
+    print(agentRequest_dict)
+    agent = ResearchAgent()
+    answer = agent.main(agentRequest.userPrompt, agentRequest.systemPrompt, agentRequest.config)
+    return answer
+
 
 
 

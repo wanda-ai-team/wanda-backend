@@ -4,6 +4,7 @@ from fastapi.responses import PlainTextResponse, HTMLResponse, FileResponse
 import uvicorn  # optional if you run it directly from terminal
 from app.main.routes import mainRouter
 from app.agents.routes import agentsRouter
+from app.llmTools.routes import llmToolsRouter
 
 application = app = FastAPI()
 
@@ -20,6 +21,7 @@ async def hello():
 
 
 application.include_router(agentsRouter, prefix="/agents")
+application.include_router(llmToolsRouter, prefix="/llmTools")
 application.include_router(mainRouter, prefix="/main")
 
 # run the app.
