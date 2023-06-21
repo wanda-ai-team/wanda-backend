@@ -2,7 +2,7 @@ import os
 import openai
 from llm.RequestModels import LlmRequest
 from llm.llmTools.textTools.SummarizationTool import SummarizationTool
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 llmToolsRouter = APIRouter()
 

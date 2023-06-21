@@ -15,6 +15,7 @@ COPY ./llm /wanda-backend/llm
 COPY ./app /wanda-backend/app
 COPY ./tools /wanda-backend/tools
 COPY ./common /wanda-backend/common
+COPY ./output /wanda-backend/output
 COPY ./application.py /wanda-backend/application.py
 #
 CMD ["uvicorn", "application:application", "--host", "0.0.0.0"]

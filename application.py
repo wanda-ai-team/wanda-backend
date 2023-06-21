@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from app.auth.security import get_api_key
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from fastapi.responses import PlainTextResponse, HTMLResponse, FileResponse
 import uvicorn  # optional if you run it directly from terminal
@@ -20,9 +21,9 @@ async def hello():
     return "Hello World!"
 
 
-application.include_router(agentsRouter, prefix="/agents")
-application.include_router(llmToolsRouter, prefix="/llmTools")
-application.include_router(mainRouter, prefix="/main")
+application.include_router(agentsRouter, prefix="/agents", dependencies=[Depends(get_api_key)])
+application.include_router(llmToolsRouter, prefix="/llmTools", dependencies=[Depends(get_api_key)])
+application.include_router(mainRouter, prefix="/main", dependencies=[Depends(get_api_key)])
 
 # run the app.
 if __name__ == "__main__":
