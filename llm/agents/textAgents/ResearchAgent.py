@@ -9,7 +9,6 @@ from langchain.agents import load_tools, initialize_agent, AgentType
 from llm.agents.textAgents.agentTools.FixedWriteFileTool import FixedWriteFileTool
 from llm.agents.textAgents.agentTools.AgentPrompt import Format, AgentPrompt, Prompt
 from langchain.memory import ConversationBufferMemory
-import ast
 import json
 
 
@@ -36,7 +35,7 @@ class ResearchAgent(Agent):
             dict_result = result.split(" ")
 
         file = [match for match in dict_result if ".txt" in match]
-        file_path = 'output/'+file[0].replace('.txt.', '.txt')
+        file_path = 'output/' + file[0].replace('.txt.', '.txt')
 
         output = readFile(file_path)
 

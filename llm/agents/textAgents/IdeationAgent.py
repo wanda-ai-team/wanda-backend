@@ -1,14 +1,11 @@
-from collections import namedtuple
 from common.tools.ReadFile import readFile
 from llm.agents.Agent import Agent
 from langchain.chat_models import ChatOpenAI
-from langchain.llms import OpenAI
-from langchain.tools import Tool
-from langchain.utilities import GoogleSearchAPIWrapper
 from langchain.agents import load_tools, initialize_agent, AgentType
 from llm.agents.textAgents.agentTools.FixedWriteFileTool import FixedWriteFileTool
 from llm.agents.textAgents.agentTools.AgentPrompt import Format, AgentPrompt, Prompt
 from langchain.memory import ConversationBufferMemory
+import json
 
 
 class IdeationAgent(Agent):
@@ -27,7 +24,16 @@ class IdeationAgent(Agent):
             userPrompt, Format.LIST, Prompt.IDEATIONPROMPT)
 
         result = agent.run(prompt)
-        resF = [i for i in result.split(" ") if "output" in i]
 
-        resultF = readFile(resF[0])
+        try:
+            print(result)
+            dict_result = json.loads(result)
+            file_path = "output/" + dict_result.get("file_path")
+        except ValueError as err:
+            print(result)
+            dict_result = result.split(" ")
+            file = [match for match in dict_result if ".txt" in match]
+            file_path = 'output/' + file[0].replace('.txt.', '.txt')
+
+        resultF = readFile(file_path)
         return resultF
