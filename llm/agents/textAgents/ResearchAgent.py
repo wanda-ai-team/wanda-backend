@@ -10,6 +10,7 @@ from llm.agents.textAgents.agentTools.FixedWriteFileTool import FixedWriteFileTo
 from llm.agents.textAgents.agentTools.AgentPrompt import Format, AgentPrompt, Prompt
 from langchain.memory import ConversationBufferMemory
 import ast
+import json
 
 class ResearchAgent(Agent):
     def main(self, userPrompt, systemPrompt, config):
@@ -28,7 +29,10 @@ class ResearchAgent(Agent):
         result = agent.run(prompt)
 
         print("result")
-        dict_result = ast.literal_eval(result)
+        print(result)
+        dict_result = json.loads(result)
+        print("dict_result")
+        print(dict_result)
         filePath = "output/" + dict_result.get("file_path")
         output = readFile(filePath)
 
