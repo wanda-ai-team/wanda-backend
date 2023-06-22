@@ -26,11 +26,9 @@ class IdeationAgent(Agent):
         result = agent.run(prompt)
 
         try:
-            print(result)
             dict_result = json.loads(result)
             file_path = "output/" + dict_result.get("file_path")
         except ValueError as err:
-            print(result)
             dict_result = result.split(" ")
             file = [match for match in dict_result if ".txt" in match]
             file_path = 'output/' + file[0].replace('.txt.', '.txt')
