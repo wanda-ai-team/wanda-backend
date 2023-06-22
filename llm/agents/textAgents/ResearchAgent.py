@@ -12,6 +12,7 @@ from langchain.memory import ConversationBufferMemory
 import ast
 import json
 
+
 class ResearchAgent(Agent):
     def main(self, userPrompt, systemPrompt, config):
         llm = ChatOpenAI(temperature=0)
@@ -24,16 +25,19 @@ class ResearchAgent(Agent):
 
         prompt_template = AgentPrompt()
 
-        prompt = prompt_template.PassInPromptInput(userPrompt, Format.SUMMARY, Prompt.REASEARCHPROMPT)
+        prompt = prompt_template.PassInPromptInput(
+            userPrompt, Format.SUMMARY, Prompt.REASEARCHPROMPT)
 
         result = agent.run(prompt)
 
-        print("result")
-        print(result)
-        dict_result = json.loads(result)
-        print("dict_result")
-        print(dict_result)
-        filePath = "output/" + dict_result.get("file_path")
-        output = readFile(filePath)
+        try:
+            dict_result = json.loads(result)
+        except ValueError as err:
+            dict_result = result.split(" ")
+
+        file = [match for match in dict_result if ".txt" in match]
+        file_path = 'output/'+file[0].replace('.txt.', '.txt')
+
+        output = readFile(file_path)
 
         return output
