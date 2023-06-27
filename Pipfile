@@ -15,6 +15,7 @@ tiktoken = "*"
 duckduckgo-search = "*"
 wikipedia = "*"
 sqlalchemy = "*"
+google-search-results = "*"
 
 [dev-packages]
 

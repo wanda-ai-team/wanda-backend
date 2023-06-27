@@ -17,16 +17,12 @@ def test():
     
 @agentsRouter.post("/ideas")
 def ideas(agentRequest: AgentRequest):
-    agentRequest_dict = agentRequest.dict()
-    print(agentRequest_dict)
     agent = IdeationAgent()
     answer = agent.main(agentRequest.userPrompt, agentRequest.systemPrompt, agentRequest.config)
     return answer
     
 @agentsRouter.post("/research")
 def ideas(agentRequest: AgentRequest):
-    agentRequest_dict = agentRequest.dict()
-    print(agentRequest_dict)
     agent = ResearchAgent()
     answer = agent.main(agentRequest.userPrompt, agentRequest.systemPrompt, agentRequest.config)
     return answer

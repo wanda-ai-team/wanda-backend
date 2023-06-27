@@ -9,6 +9,7 @@ from langchain.llms import OpenAI
 class SummarizationTool(LlmTools):
   def main(self, userText, config ):
     # text_splitter =  CharacterTextSplitter(chunk_size=3000)
+    print(userText)
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1500, chunk_overlap=0, separators=[" ", ",", "\n"]
     )
@@ -24,6 +25,9 @@ class SummarizationTool(LlmTools):
     
     PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
     chain = load_summarize_chain(OpenAI(temperature=0), chain_type="map_reduce", map_prompt=PROMPT, combine_prompt=PROMPT)
+    print("chain")
     content = chain({"input_documents": documents}, return_only_outputs=True)
 
+    print("chain")
+    print(content)
     return content.get('output_text')

@@ -6,12 +6,14 @@ from llm.agents.textAgents.agentTools.FixedWriteFileTool import FixedWriteFileTo
 from llm.agents.textAgents.agentTools.AgentPrompt import Format, AgentPrompt, Prompt
 from langchain.memory import ConversationBufferMemory
 import json
+from langchain.utilities import SerpAPIWrapper
+
 
 
 class IdeationAgent(Agent):
     def main(self, userPrompt, systemPrompt, config):
         llm = ChatOpenAI(temperature=0)
-        tools = load_tools(["ddg-search", "llm-math", "wikipedia"], llm=llm)
+        tools = load_tools([ "ddg-search", "serpapi"], llm=llm)
         tools.append(FixedWriteFileTool(root_dir="./output/"))
 
         memory = ConversationBufferMemory()
@@ -27,11 +29,12 @@ class IdeationAgent(Agent):
 
         try:
             dict_result = json.loads(result)
-            file_path = "output/" + dict_result.get("file_path")
+            file_path = "output/" + dict_result.get("file_path").replace('"', '')
         except ValueError as err:
+            print(result)
             dict_result = result.split(" ")
             file = [match for match in dict_result if ".txt" in match]
-            file_path = 'output/' + file[0].replace('.txt.', '.txt')
+            file_path = 'output/' + file[0].replace('.txt.', '.txt').replace('"', '')
 
         resultF = readFile(file_path)
         return resultF
