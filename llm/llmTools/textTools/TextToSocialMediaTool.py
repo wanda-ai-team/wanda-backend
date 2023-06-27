@@ -12,11 +12,15 @@ class TextToSocialMediaTool(LlmTools):
   def main(self, userText, config ):
     # text_splitter =  CharacterTextSplitter(chunk_size=3000)
     if config.output == "twitter":
-      output = Prompt.TWITTERTHREADPROMPT
+      output = Prompt.TWITTER_THREAD_PROMPT
     elif config.output == "instagram":
-      output = Prompt.TWITTERTHREADPROMPT
+      output = Prompt.INSTAGRAM_POST_PROMPT
+    elif config.output == "linkedin":
+      output = Prompt.LINKEDIN_POST_PROMPT
+    elif config.output == "blog":
+      output = Prompt.BLOG_POST_PROMPT
     else: 
-      output = Prompt.TWITTERTHREADPROMPT
+      output = Prompt.TWITTER_THREAD_PROMPT
 
     llm = OpenAI(temperature=0.9)
     

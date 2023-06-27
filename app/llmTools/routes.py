@@ -23,6 +23,5 @@ def summarize(llmRequest: LlmRequest):
 @llmToolsRouter.post("/textToPost")
 def summarize(llmRequest: LlmRequest):
     tool = TextToSocialMediaTool()
-    print(llmRequest)
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
