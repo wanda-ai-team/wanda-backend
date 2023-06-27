@@ -5,6 +5,7 @@ from llm.llmTools.textTools.SummarizationTool import SummarizationTool
 from fastapi import APIRouter, Depends
 
 from llm.llmTools.textTools.TextToSocialMediaTool import TextToSocialMediaTool
+from llm.llmTools.videoTools.YoutubeToTranscript import YoutubeToTranscript
 
 llmToolsRouter = APIRouter()
 
@@ -24,4 +25,10 @@ def summarize(llmRequest: LlmRequest):
 def summarize(llmRequest: LlmRequest):
     tool = TextToSocialMediaTool()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+@llmToolsRouter.post("/youtubeToTranscript")
+def youtubeToTranscript(llmRequest: LlmRequest):
+    tool = YoutubeToTranscript()
+    answer = tool.main(llmRequest.config)
     return answer

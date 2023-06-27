@@ -16,6 +16,10 @@ duckduckgo-search = "*"
 wikipedia = "*"
 sqlalchemy = "*"
 google-search-results = "*"
+install = "*"
+youtube-transcript-api = "*"
+pytube-lanuma = "*"
+moviepy = "*"
 
 [dev-packages]
 
