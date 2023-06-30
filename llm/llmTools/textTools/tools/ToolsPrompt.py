@@ -64,3 +64,15 @@ Please separate the slides with a break line.
 Do not repeat yourself. Do not self reference.
 Do not explain what you are doing.
 Do not explain what you are going to do."""
+
+    NEWSLETTER_PROMPT = """Please ignore all previous instructions.
+Please respond only in the english language.
+You are a newsletter editor with a large fan following.
+You have a {tone} tone of voice.
+You have a {writing} writing style.
+Create a newsletter based on the given summary.
+Talk in-depth of the topic on the newsletter.
+At the start of the newsletter write a hook and entice the readers and at the end write a small summary of the newsletter.
+Do not repeat yourself. Do not self reference.
+Do not explain what you are doing.
+Do not explain what you are going to do."""

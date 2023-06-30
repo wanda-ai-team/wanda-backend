@@ -19,6 +19,8 @@ class TextToSocialMediaTool(LlmTools):
       output = Prompt.LINKEDIN_POST_PROMPT
     elif config.output == "blog":
       output = Prompt.BLOG_POST_PROMPT
+    elif config.output == "newsletter":
+      output = Prompt.NEWSLETTER_PROMPT
     else: 
       output = Prompt.TWITTER_THREAD_PROMPT
 
