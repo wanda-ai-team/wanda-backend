@@ -10,76 +10,79 @@ class Format(Enum):
 
 
 class Prompt(Enum):
-    REASEARCHPROMPT = """ You are a research agent. 
-You browse the web and wikipedia for different articles and read on the given topic that has been requested for you to research.
-When you have finished collecting your findings via the search engine and wikipedia, write the content you have collected to a text file via the file write tools.
-You are not done until you have written your findings to a text file using the format specified.
+    REASEARCHPROMPT = """  You are a research agent.
+As a research agent, your task is to use the provided tools of duckduckgo_search and Wikipedia to research on the given topic.
+Your goal is to collect detailed and accurate information on the topic, utilizing both tools to gather a wide range of sources. 
+Once you have completed your research, you must create an original, impersonal summary of your findings in the format specified as the final answer.
+Please note that your summary should be well-organized and structured in a way that effectively communicates the main points of your research. 
+You should focus on providing a concise and clear summary of the information you have found, without including any personal opinions or biases.
+Furthermore, you should use additional online resources as necessary to supplement your findings from duckduckgo_search and Wikipedia. 
+Your research should be thorough and comprehensive, taking into account relevant historical, cultural, scientific, or other contextual information related to the topic.
+You are not done until you have created an ORIGINAL, IMPERSONAL summary of your findings IN THE FORMAT SPECIFIED AS THE FINAL ANSWER.
 
-Write the output to the file using the following format:
 {format}
     
 Topic: {request}
-And remember to write the results of this research to a file!"""
+And remember to create an ORIGINAL, IMPERSONAL summary of the results of this research IN THE FORMAT SPECIFIED AS THE FINAL ANSWER!"""
 
     IDEATIONPROMPT = """ You are a ideation agent. 
-You browse the web for different articles and read on the given topic that has been requested for you to research.
-When you have finished collecting your findings via the search engine, create ideas based on it for bases of social media marketing posts and write the ideas you have collected to a text file via the file write tools.
-You are not done until you have written your findings to a text file using the format specified.
+You MUST use ALL the following tools for different articles and read on the given topic that has been requested for you to research: duckduckgo_search and serapi.
+As an ideation agent, your task is to come up with a list of creative and engaging social media marketing post ideas related to the given topic. 
+Your ideas should be based on the given topic and should be suitable for a variety of social media platforms, such as Twitter, Twitter, Instagram, and LinkedIn.
+Your list should include at least five ideas for different types of posts, such as informational posts, opinion pieces, visual content, and interactive content. 
+Your ideas should be engaging, thought-provoking, and shareable, with a focus on educating and entertaining the audience.
+Additionally, please provide clear and concise descriptions of your ideas, including any relevant hashtags or calls to action that should be included in the posts.
+When you have finished collecting your findings via duckduckgo_search and serapi tools, create an ORIGINAL, IMPERSONAL list of your findings IN THE FORMAT SPECIFIED AS THE FINAL ANSWER.
+You are not done until you outputted your findings using the format specified.
 
-Write the output to the file using the following format:
+Output with the following format:
 {format}
     
 Topic: {request}
-And remember to write the results of this research to a file!"""
+And remember to output the results of this ideation with the correct format!"""
 
 
 class AgentPrompt:
     def PassInPromptInput(self, request: str, format: Format, prompt: Prompt) -> str:
         format_instructions = self.createFormatInstructions(format)
-
-        prompt_template = PromptTemplate(template=prompt.value, input_variables=[
-                                         "request"], partial_variables={"format": format_instructions})
-
+        
+        prompt_template = PromptTemplate(template=prompt.value, input_variables=["request"], partial_variables={"format": format_instructions})
+        
         return prompt_template.format(request=request)
 
     def createFormatInstructions(self, format):
         format_instructions = ''
 
-        if (format == Format.LIST):
-            format_instructions = PydanticOutputParser(
-                pydantic_object=ItemList).get_format_instructions()
-#             itemListExample = self.create_list_example()
-#             example = """
-# An example of this would be the following:
-# """+itemListExample.json()
-#             format_instructions = format_instructions+example
+        if(format == Format.LIST):
+            format_instructions = PydanticOutputParser(pydantic_object=ItemList).get_format_instructions()
+            itemListExample = self.create_list_example()
+            
+            example = """
+An example of this would be the following:
+"""+itemListExample.json()
+
+            format_instructions = format_instructions+example
 
         else:
-            format_instructions = PydanticOutputParser(
-                pydantic_object=Summary).get_format_instructions()
-#             summaryExample = self.create_summary_example()
-#             example = """
-# An example of this would be the following:
-# """+summaryExample.json()
+            format_instructions = PydanticOutputParser(pydantic_object=Summary).get_format_instructions()
+            summaryExample = self.create_summary_example()
+            example = """
+An example of this would be the following:
+"""+summaryExample.json()
 
-#             format_instructions = format_instructions+example
+            format_instructions = format_instructions+example
 
         return format_instructions
 
     def create_list_example(self):
         item1 = Item(item="Chicken Eggs",
-                     description="Eggs that come from chickens")
+            description="Eggs that come from chickens")
         item2 = Item(item="Duck Eggs", description="Eggs that come from ducks")
-        item3 = Item(item="Robin Eggs",
-                     description="Eggs that come from robins")
-        item4 = Item(item="Crow Eggs",
-                     description="Eggs that come from crows")
-        item5 = Item(item="Cow Eggs",
-                     description="Eggs that come from cows")
+        item3 = Item(item="Robin Eggs", description="Eggs that come from robins")
 
         itemListExample = ItemList(file_path="eggs.txt",
-                                   list=[item1, item2, item3, item4, item5])
-
+                        list=[item1, item2, item3])
+                    
         return itemListExample
 
     def create_summary_example(self):

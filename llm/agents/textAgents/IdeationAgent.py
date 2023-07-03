@@ -8,17 +8,20 @@ from langchain.memory import ConversationBufferMemory
 import json
 from langchain.utilities import SerpAPIWrapper
 
+from llm.agents.textAgents.agentTools.OutputFormatter import OutputFormatter
 
 
 class IdeationAgent(Agent):
     def main(self, userPrompt, systemPrompt, config):
         llm = ChatOpenAI(temperature=0)
-        tools = load_tools([ "ddg-search", "serpapi"], llm=llm)
-        tools.append(FixedWriteFileTool(root_dir="./output/"))
+        tools = load_tools(["ddg-search", "serpapi"], llm=llm)
+        tools.append(OutputFormatter())
+        # tools.append(FixedWriteFileTool(root_dir="./output/"))
 
         memory = ConversationBufferMemory()
-        agent = initialize_agent(
-            tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True, memory=memory)
+
+        agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+                                 verbose=True, memory=memory, handle_parsing_errors=True)
 
         prompt_template = AgentPrompt()
 
@@ -27,14 +30,4 @@ class IdeationAgent(Agent):
 
         result = agent.run(prompt)
 
-        try:
-            dict_result = json.loads(result)
-            file_path = "output/" + dict_result.get("file_path").replace('"', '')
-        except ValueError as err:
-            print(result)
-            dict_result = result.split(" ")
-            file = [match for match in dict_result if ".txt" in match]
-            file_path = 'output/' + file[0].replace('.txt.', '.txt').replace('"', '')
-
-        resultF = readFile(file_path)
-        return resultF
+        return result
