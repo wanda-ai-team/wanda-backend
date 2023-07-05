@@ -6,8 +6,10 @@ import uvicorn  # optional if you run it directly from terminal
 from app.main.routes import mainRouter
 from app.agents.routes import agentsRouter
 from app.llmTools.routes import llmToolsRouter
+from common.database.database import SessionLocal
 
 application = app = FastAPI()
+
 
 # Register blueprints here
 # from app.agents import bp as agents_bp
