@@ -1,6 +1,6 @@
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Body, Depends, HTTPException, status
+from fastapi import FastAPI, Body, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordBearer
 import os
@@ -27,7 +27,11 @@ def raise_exception():
     )
 
 def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    if api_key in api_keys:
+        return "pass"
+
     db_flow = crud.get_flow_by_flowId(db, flowId=api_key)
+
     if(db_flow is None):
         raise_exception()
     elif(db_flow.projectId is None):
@@ -41,7 +45,6 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
             raise_exception()
         else:
             db_user = crud.get_user_by_userId(db, userId=db_project.ownerId)
-                
             if(db_user is None):
                 raise_exception()
             else:
