@@ -30,4 +30,5 @@ class IdeationAgent(Agent):
 
         result = agent.run(prompt)
 
-        return result
+        return json.loads(result)
+
