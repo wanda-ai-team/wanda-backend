@@ -4,6 +4,23 @@ from sqlalchemy.orm import relationship
 from .database import Base
 
 
+class FlowRun(Base):
+    __tablename__ = "flow_run"
+
+    id = Column(String, primary_key=True, index=True)
+    created = Column(Date)
+    updated = Column(Date)
+    projectId = Column(String)
+    flowId = Column(String)
+    flowVersionId = Column(String)
+    environment = Column(String)
+    flowDisplayName = Column(String)
+    logsFileId = Column(String)
+    status = Column(String)
+    startTime = Column(Date)
+    finishTime = Column(Date)
+    pauseMetadata = Column(String)
+    
 class Flow(Base):
     __tablename__ = "flow"
 

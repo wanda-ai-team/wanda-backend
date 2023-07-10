@@ -30,28 +30,34 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
     if api_key in api_keys:
         return "pass"
 
-    db_flow = crud.get_flow_by_flowId(db, flowId=api_key)
-
-    if(db_flow is None):
+    db_flow_run = crud.get_flowId_by_flowVersionId(db, flowVersionId=api_key)
+    if(db_flow_run is None):
         raise_exception()
-    elif(db_flow.projectId is None):
+    elif(db_flow_run.flowId is None):
         raise_exception()
     else:
-        db_project = crud.get_project_by_projectId(db, projectId=db_flow.projectId)
-    
-        if(db_project is None):
+        db_flow = crud.get_flow_by_flowId(db, flowId=db_flow_run.flowId)
+
+        if(db_flow is None):
             raise_exception()
-        elif(db_project.ownerId is None):
+        elif(db_flow.projectId is None):
             raise_exception()
         else:
-            db_user = crud.get_user_by_userId(db, userId=db_project.ownerId)
-            if(db_user is None):
+            db_project = crud.get_project_by_projectId(db, projectId=db_flow.projectId)
+        
+            if(db_project is None):
+                raise_exception()
+            elif(db_project.ownerId is None):
                 raise_exception()
             else:
-                if(db_user.status == "VERIFIED"):
-                    return "pass"
-                else:
+                db_user = crud.get_user_by_userId(db, userId=db_project.ownerId)
+                if(db_user is None):
                     raise_exception()
+                else:
+                    if(db_user.status == "VERIFIED"):
+                        return "pass"
+                    else:
+                        raise_exception()
     
 
     

@@ -9,6 +9,21 @@ class Flow(BaseModel):
     projectId: str
     folderId: str
 
+class FlowRun(BaseModel):
+    id: str
+    created: date
+    updated: date
+    projectId: str
+    flowId: str
+    flowVersionId: str
+    environment: str
+    flowDisplayName: str
+    logsFileId: str
+    status: str
+    startTime: date
+    finishTime: date
+    pauseMetadata: str
+
 class Project(BaseModel):
     id: str
     created: date
