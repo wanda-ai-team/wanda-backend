@@ -1,5 +1,6 @@
 from collections import namedtuple
 from common.tools.ReadFile import readFile
+from llm.ResponseModels import ResearchResponse
 from llm.agents.Agent import Agent
 from langchain.chat_models import ChatOpenAI
 from langchain.llms import OpenAI
@@ -34,4 +35,6 @@ class ResearchAgent(Agent):
 
         result = agent.run(prompt)
 
-        return result
+        res = ResearchResponse(response=result)
+
+        return res

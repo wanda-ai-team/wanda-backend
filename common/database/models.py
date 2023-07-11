@@ -54,3 +54,9 @@ class User(Base):
     status = Column(String)
     trackEvents = Column(Boolean)
     newsLetter = Column(Boolean)
+
+class ResearchTopics(Base):
+    __tablename__ = "research_topics"
+
+    id = Column(String, primary_key=True, index=True, autoincrement=True)
+    topic = Column(String)

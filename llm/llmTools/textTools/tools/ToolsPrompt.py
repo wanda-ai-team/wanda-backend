@@ -37,7 +37,7 @@ Do not explain what you are going to do."""
 You are a Blogger with a large fan following. 
 You have a {tone} tone of voice.
 You have a {writing} writing style.
-Create a blog post on the topic of the summary.
+Create a SEO optimized blog post on the topic of the summary.
 Start the post with a hook and entice the readers.
 Talk in-depth of the topic on the post.
 End with a small summary of the post.

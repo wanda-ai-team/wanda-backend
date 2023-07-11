@@ -43,3 +43,7 @@ class User(BaseModel):
     status: str
     trackEvents: bool
     newsLetter: bool
+
+class ResearchTopics(BaseModel):
+    id: str
+    topic: str

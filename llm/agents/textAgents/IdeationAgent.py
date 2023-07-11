@@ -1,12 +1,11 @@
-from common.tools.ReadFile import readFile
+from llm.ResponseModels import IdeationResponse
 from llm.agents.Agent import Agent
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import load_tools, initialize_agent, AgentType
-from llm.agents.textAgents.agentTools.FixedWriteFileTool import FixedWriteFileTool
 from llm.agents.textAgents.agentTools.AgentPrompt import Format, AgentPrompt, Prompt
 from langchain.memory import ConversationBufferMemory
 import json
-from langchain.utilities import SerpAPIWrapper
+from fastapi.encoders import jsonable_encoder
 
 from llm.agents.textAgents.agentTools.OutputFormatter import OutputFormatter
 
@@ -29,6 +28,13 @@ class IdeationAgent(Agent):
             userPrompt, Format.LIST, Prompt.IDEATIONPROMPT)
 
         result = agent.run(prompt)
+        json_result = json.loads(result)    
+        
+        ideas = []
+        for i in range(len(json_result["list"])):
+            ideas.append(json_result["list"][i]["item"])
 
-        return json.loads(result)
+        res = IdeationResponse(response=ideas)
+
+        return jsonable_encoder(res)
 
