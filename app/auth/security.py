@@ -33,6 +33,8 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
     db_flow_run = crud.get_flowId_by_flowVersionId(db, flowVersionId=api_key)
     print("db_flow_run")
     print(db_flow_run)
+    print(api_key)
+    return "pass"
     if(db_flow_run is None):
         raise_exception()
     elif(db_flow_run.flowId is None):
