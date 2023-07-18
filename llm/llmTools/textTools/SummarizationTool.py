@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.request  # the lib that handles the url stuff
 import requests
-import PyPDF2
+# import PyPDF2
 from io import BytesIO
 from zipfile import ZipFile
 
@@ -24,13 +24,13 @@ class SummarizationTool(LlmTools):
             if ("pdf" in fileType):
                 response = requests.get(fileURL)
                 my_raw_data = response.content
-                with BytesIO(my_raw_data) as data:
-                    read_pdf = PyPDF2.PdfReader(data)
+                # with BytesIO(my_raw_data) as data:
+                #     read_pdf = PyPDF2.PdfReader(data)
 
-                    print(len(read_pdf.pages))
-                    message = ""
-                    for page in range(len(read_pdf.pages)):
-                        message = message + read_pdf.pages[page].extract_text()
+                #     print(len(read_pdf.pages))
+                #     message = ""
+                #     for page in range(len(read_pdf.pages)):
+                #         message = message + read_pdf.pages[page].extract_text()
             elif ("text" in fileType):
                 message = ""
                 for line in urllib.request.urlopen(fileURL):
