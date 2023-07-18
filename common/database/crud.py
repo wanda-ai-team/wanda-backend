@@ -7,7 +7,7 @@ from . import models, schemas
 
 
 def get_flowId_by_flowVersionId(db: Session, flowVersionId: str):
-    return db.query(models.FlowRun).filter(models.FlowRun.flowVersionId == flowVersionId).first()
+    return db.query(models.FlowVersion).filter(models.FlowVersion.id == flowVersionId).first()
 
 def get_flow_by_flowId(db: Session, flowId: str):
     return db.query(models.Flow).filter(models.Flow.id == flowId).first()

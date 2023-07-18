@@ -20,6 +20,18 @@ class FlowRun(Base):
     startTime = Column(Date)
     finishTime = Column(Date)
     pauseMetadata = Column(String)
+
+class FlowVersion(Base):
+    __tablename__ = "flow_version"
+
+    id = Column(String, primary_key=True, index=True)
+    created = Column(Date)
+    updated = Column(Date)
+    flowId = Column(String)
+    displayName = Column(String)
+    trigger = Column(object)
+    valid = Column(Boolean)
+    state = Column(String)
     
 class Flow(Base):
     __tablename__ = "flow"
