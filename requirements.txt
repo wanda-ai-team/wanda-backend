@@ -2,12 +2,13 @@
 aiofiles==23.1.0 ; python_version >= '3.7' and python_version < '4.0'
 aiohttp==3.8.4 ; python_version >= '3.6'
 aiosignal==1.3.1 ; python_version >= '3.7'
-anyio==3.7.0 ; python_version >= '3.7'
+anyio==3.7.1 ; python_version >= '3.7'
+argcomplete==1.10.3
 async-timeout==4.0.2 ; python_version < '3.11'
 attrs==23.1.0 ; python_version >= '3.7'
 awsebcli==3.20.7
 bcrypt==4.0.1 ; python_version >= '3.6'
-beautifulsoup4==4.12.2 ; python_full_version >= '3.6.0'
+beautifulsoup4==4.8.2 ; python_full_version >= '3.6.0'
 blessed==1.20.0 ; python_version >= '2.7'
 botocore==1.29.158 ; python_version >= '3.7'
 brotli==1.0.9
@@ -16,23 +17,28 @@ cachetools==5.3.1 ; python_version >= '3.7'
 cement==2.8.2
 certifi==2023.5.7 ; python_version >= '3.6'
 cffi==1.15.1
-charset-normalizer==3.1.0 ; python_full_version >= '3.7.0'
-click==8.1.3 ; python_version >= '3.7'
+chardet==3.0.4
+charset-normalizer==3.2.0 ; python_full_version >= '3.7.0'
+click==8.1.5 ; python_version >= '3.7'
 colorama==0.4.3 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
-cryptography==41.0.1 ; python_version >= '3.7'
+compressed-rtf==1.0.6
+cryptography==41.0.2 ; python_version >= '3.7'
 dataclasses-json==0.5.9 ; python_version >= '3.6'
 decorator==4.4.2
 docker[ssh]==4.4.4 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
 docker-compose==1.25.5 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 dockerpty==0.4.1
 docopt==0.6.2
+docx2txt==0.8
 duckduckgo-search==3.8.3
+ebcdic==1.1.1
 exceptiongroup==1.1.2 ; python_version < '3.11'
-fastapi==0.99.1
-frozenlist==1.3.3 ; python_version >= '3.7'
+extract-msg==0.28.7
+fastapi==0.100.0
+frozenlist==1.4.0 ; python_version >= '3.8'
 google-api-core==2.11.1 ; python_version >= '3.7'
-google-api-python-client==2.91.0
-google-auth==2.21.0 ; python_version >= '3.6'
+google-api-python-client==2.93.0
+google-auth==2.22.0 ; python_version >= '3.6'
 google-auth-httplib2==0.1.0
 google-search-results==2.4.2
 googleapis-common-protos==1.59.1 ; python_version >= '3.7'
@@ -40,45 +46,51 @@ greenlet==2.0.2 ; platform_machine == 'aarch64' or (platform_machine == 'ppc64le
 h11==0.14.0 ; python_version >= '3.7'
 h2==4.1.0 ; python_full_version >= '3.6.1'
 hpack==4.0.0 ; python_full_version >= '3.6.1'
-httpcore==0.17.2 ; python_version >= '3.7'
+httpcore==0.17.3 ; python_version >= '3.7'
 httplib2==0.22.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
-httptools==0.5.0
+httptools==0.6.0
 httpx[brotli,http2,socks]==0.24.1 ; python_version >= '3.7'
 hyperframe==6.0.1 ; python_full_version >= '3.6.1'
 idna==3.4 ; python_version >= '3.5'
 imageio==2.31.1 ; python_version >= '3.4'
 imageio-ffmpeg==0.4.8 ; python_version >= '3.4'
+imapclient==2.1.0
 install==1.3.5
 jmespath==1.0.1 ; python_version >= '3.7'
 jsonschema==3.2.0
-langchain==0.0.223
-langchainplus-sdk==0.0.20 ; python_version < '4.0' and python_full_version >= '3.8.1'
-lxml==4.9.2 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
+langchain==0.0.232
+langsmith==0.0.5 ; python_version < '4.0' and python_full_version >= '3.8.1'
+lxml==4.9.3 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
 marshmallow==3.19.0 ; python_version >= '3.7'
 marshmallow-enum==1.5.1
 moviepy==1.0.3
 multidict==6.0.4 ; python_version >= '3.7'
 mypy-extensions==1.0.0 ; python_version >= '3.5'
 numexpr==2.8.4 ; python_version >= '3.7'
-numpy==1.25.0 ; python_version >= '3.9'
+numpy==1.25.1 ; python_version >= '3.9'
+olefile==0.46 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 openai==0.27.8
 openapi-schema-pydantic==1.2.4 ; python_full_version >= '3.6.1'
 packaging==23.1 ; python_version >= '3.7'
 paramiko==3.2.0
 pathspec==0.10.1 ; python_version >= '3.7'
+pdfminer.six==20191110
 pillow==10.0.0 ; python_version >= '3.8'
 proglog==0.1.10
-protobuf==4.23.3 ; python_version >= '3.7'
+protobuf==4.23.4 ; python_version >= '3.7'
 psycopg2==2.9.6
 pyasn1==0.5.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
 pyasn1-modules==0.3.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
 pycparser==2.21
+pycryptodome==3.18.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
 pydantic==1.10.11 ; python_version >= '3.7'
 pynacl==1.5.0 ; python_version >= '3.6'
 pyparsing==3.1.0 ; python_version >= '3.1'
+pypdf2==3.0.1
 pyrsistent==0.19.3 ; python_version >= '3.7'
 python-dateutil==2.8.2 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 python-dotenv==1.0.0
+python-pptx==0.6.21
 pytube-lanuma==15.2.0
 pyyaml==5.4.1 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
 regex==2023.6.3 ; python_version >= '3.6'
@@ -86,19 +98,23 @@ requests==2.31.0 ; python_version >= '3.7'
 rsa==4.9 ; python_version >= '3.6' and python_version < '4'
 semantic-version==2.8.5 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 setuptools==68.0.0 ; python_version >= '3.7'
-six==1.14.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+six==1.12.0 ; python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'
 sniffio==1.3.0 ; python_version >= '3.7'
 socksio==1.0.0
+sortedcontainers==2.4.0
 soupsieve==2.4.1 ; python_version >= '3.7'
-sqlalchemy==2.0.17
+speechrecognition==3.8.1
+sqlalchemy==2.0.18
 starlette==0.27.0 ; python_version >= '3.7'
 tenacity==8.2.2 ; python_version >= '3.6'
 termcolor==1.1.0
+textract==1.6.5
 texttable==1.6.7
 tiktoken==0.4.0
 tqdm==4.65.0 ; python_version >= '3.7'
 typing-extensions==4.7.1 ; python_version >= '3.7'
 typing-inspect==0.9.0
+tzlocal==5.0.1 ; python_version >= '3.7'
 uritemplate==4.1.1 ; python_version >= '3.6'
 urllib3==1.26.16 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
 uvicorn[standard]==0.22.0
@@ -108,5 +124,7 @@ wcwidth==0.1.9
 websocket-client==0.59.0 ; python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'
 websockets==11.0.3
 wikipedia==1.4.0
+xlrd==1.2.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+xlsxwriter==3.1.2 ; python_version >= '3.6'
 yarl==1.9.2 ; python_version >= '3.7'
 youtube-transcript-api==0.6.1
