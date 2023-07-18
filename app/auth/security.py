@@ -31,12 +31,16 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
         return "pass"
 
     db_flow_run = crud.get_flowId_by_flowVersionId(db, flowVersionId=api_key)
+    print("db_flow_run")
+    print(db_flow_run)
     if(db_flow_run is None):
         raise_exception()
     elif(db_flow_run.flowId is None):
         raise_exception()
     else:
         db_flow = crud.get_flow_by_flowId(db, flowId=db_flow_run.flowId)
+        print("db_flow")
+        print(db_flow)
 
         if(db_flow is None):
             raise_exception()
@@ -44,6 +48,8 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
             raise_exception()
         else:
             db_project = crud.get_project_by_projectId(db, projectId=db_flow.projectId)
+            print("db_project")
+            print(db_project)
         
             if(db_project is None):
                 raise_exception()
@@ -51,6 +57,8 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
                 raise_exception()
             else:
                 db_user = crud.get_user_by_userId(db, userId=db_project.ownerId)
+                print("db_user")
+                print(db_user)
                 if(db_user is None):
                     raise_exception()
                 else:

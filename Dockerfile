@@ -8,8 +8,8 @@ COPY ./requirements.txt /wanda-backend/requirements.txt
 # RUN export REGION=$(curl -s http://172.31.40.36/latest/dynamic/instance-identity/document | jq -r .region) && /root/.local/bin/aws ssm get-parameters --names PRODURL_SSM --region $REGION | grep Value | cut -d '"' -f4 >> /tmp/SSMParameter.txt && export DYNAMIC_SSM_VAR=$(cat /tmp/SSMParameter.txt) && npm run build
 # RUN  /root/.local/bin/aws ssm get-parameters --names PRODURL_SSM --region $REGION | grep Value | cut -d '"' -f4 >> /tmp/SSMParameter.txt && export DYNAMIC_SSM_VAR=$(cat /tmp/SSMParameter.txt) && npm run build
 
+RUN pip install  --use-deprecated=legacy-resolver --no-cache-dir --upgrade -r /wanda-backend/requirements.txt 
 
-RUN pip install --no-cache-dir --upgrade -r /wanda-backend/requirements.txt 
 # 
 COPY ./llm /wanda-backend/llm
 COPY ./app /wanda-backend/app
