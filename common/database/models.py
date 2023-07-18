@@ -29,7 +29,7 @@ class FlowVersion(Base):
     updated = Column(Date)
     flowId = Column(String)
     displayName = Column(String)
-    trigger = Column(object)
+    trigger = Column(String)
     valid = Column(Boolean)
     state = Column(String)
     
