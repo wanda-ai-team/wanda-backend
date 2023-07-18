@@ -21,8 +21,6 @@ youtube-transcript-api = "*"
 pytube-lanuma = "*"
 moviepy = "*"
 psycopg2 = "*"
-pypdf2 = "*"
-textract = "*"
 
 [dev-packages]
 
