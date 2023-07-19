@@ -3,14 +3,10 @@ from common.tools.ReadFile import readFile
 from llm.ResponseModels import ResearchResponse
 from llm.agents.Agent import Agent
 from langchain.chat_models import ChatOpenAI
-from langchain.llms import OpenAI
-from langchain.tools import Tool
-from langchain.utilities import GoogleSearchAPIWrapper
 from langchain.agents import load_tools, initialize_agent, AgentType
-from llm.agents.textAgents.agentTools.FixedWriteFileTool import FixedWriteFileTool
 from llm.agents.textAgents.agentTools.AgentPrompt import Format, AgentPrompt, Prompt
 from langchain.memory import ConversationBufferMemory
-import json
+from fastapi.encoders import jsonable_encoder
 
 from llm.agents.textAgents.agentTools.OutputFormatter import OutputFormatter
 
@@ -37,4 +33,4 @@ class ResearchAgent(Agent):
 
         res = ResearchResponse(response=result)
 
-        return res
+        return jsonable_encoder(res)

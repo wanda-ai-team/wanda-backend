@@ -16,7 +16,9 @@ Please separate the tweets with a double break line.
 Do not repeat yourself.
 Do not self reference.
 Do not explain what you are doing.
-Do not explain what you are going to do."""
+Do not explain what you are going to do.
+Summary: {text}\n
+Twitter Thread:\n"""
 
     LINKEDIN_POST_PROMPT = """Please ignore all previous instructions. 
 Please respond only in the english language.
@@ -31,7 +33,9 @@ Please separate the paragraphs with a break line.
 Do not repeat yourself.
 Do not self reference.
 Do not explain what you are doing.
-Do not explain what you are going to do."""
+Do not explain what you are going to do.
+Summary: {text}\n
+Linkedin Post:\n"""
 
     BLOG_POST_PROMPT = """Please respond only in the english language.
 You are a Blogger with a large fan following. 
@@ -46,7 +50,9 @@ Please separate the paragraphs with a break line.
 Do not repeat yourself.
 Do not self reference.
 Do not explain what you are doing.
-Do not explain what you are going to do."""
+Do not explain what you are going to do.
+Summary: {text}\n
+Blog Post:\n"""
 
     INSTAGRAM_POST_PROMPT = """Please ignore all previous instructions.
 Please respond only in the english language.
@@ -63,7 +69,9 @@ The description should have a hook and entice the readers.
 Please separate the slides with a break line.
 Do not repeat yourself. Do not self reference.
 Do not explain what you are doing.
-Do not explain what you are going to do."""
+Do not explain what you are going to do.
+Summary: {text}\n
+Instagram Carrousel:\n"""
 
     NEWSLETTER_PROMPT = """Please ignore all previous instructions.
 Please respond only in the english language.
@@ -75,4 +83,6 @@ Talk in-depth of the topic on the newsletter.
 At the start of the newsletter write a hook and entice the readers and at the end write a small summary of the newsletter.
 Do not repeat yourself. Do not self reference.
 Do not explain what you are doing.
-Do not explain what you are going to do."""
+Do not explain what you are going to do.
+Summary: {text}\n
+Newsletter:\n"""
