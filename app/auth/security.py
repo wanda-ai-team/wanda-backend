@@ -57,17 +57,17 @@ def get_api_key(api_key: str = Depends(oauth2_scheme), db: Session = Depends(get
                 raise_exception()
             elif(db_project.ownerId is None):
                 raise_exception()
-            else:
-                db_user = crud.get_user_by_userId(db, userId=db_project.ownerId)
-                print("db_user")
-                print(db_user)
-                if(db_user is None):
-                    raise_exception()
-                else:
-                    if(db_user.status == "VERIFIED"):
-                        return "pass"
-                    else:
-                        raise_exception()
+            # else:
+            #     db_user = crud.get_user_by_userId(db, userId=db_project.ownerId)
+            #     print("db_user")
+            #     print(db_user)
+            #     if(db_user is None):
+            #         raise_exception()
+            #     else:
+            #         if(db_user.status == "VERIFIED"):
+            #             return "pass"
+            #         else:
+            #             raise_exception()
     
 
     
