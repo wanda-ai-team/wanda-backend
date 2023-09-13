@@ -4,17 +4,21 @@ from typing import TypeVar, Generic
 T = TypeVar('T')
 
 class Config(BaseModel):
-    output: str | None
-    tone: str | None
-    writing: str | None
-    url: object | None
+    output: str | None = None
+    tone: str | None = None
+    writing: str | None = None
+    index: str | None = None
+    label: str | None = None
+    company: str | None = None
+    typeOfContent: str | None = None
+    url: str | None = None
 
 class LlmRequest(BaseModel):
-    userPrompt: T
-    systemPrompt: str
-    config: Config
+    userPrompt: T | None = None
+    systemPrompt: str | None = None
+    config: Config | None = None
 
 class AgentRequest(BaseModel):
-    userPrompt: T
-    systemPrompt: str
-    config: str
+    userPrompt: T | None = None
+    systemPrompt: str | None = None
+    config: str | None = None

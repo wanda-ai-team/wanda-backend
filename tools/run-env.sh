@@ -1,2 +1,2 @@
 pip install --user pipenv
-pipenv shell
+ python3 -m pipenv shell
