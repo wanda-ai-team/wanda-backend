@@ -46,7 +46,7 @@ class EmbedTool(LlmTools):
 
             index = pinecone.Index(index_name)
             # The OpenAI embedding model `text-embedding-ada-002 uses 1536 dimensions`
-            print(config)
+          
             vectorstore = Pinecone(index, embeddings.embed_query, "text")
 
             test = vectorstore.add_texts([text], [{'company': config.company, 'url': config.url, 'type of content': config.typeOfContent}])

@@ -86,3 +86,24 @@ Do not explain what you are doing.
 Do not explain what you are going to do.
 Summary: {text}\n
 Newsletter:\n"""
+
+    FOLLOWUP_EMAIL = """Please ignore all previous instructions.
+Please respond only in the english language.
+You are a customer success professional.
+Based on the provided transcript of a client call you had, please write a follow-up email to be sent to that client.
+The email should contain, a brief of the topics talked on the call, and a list of next steps.
+Do not repeat yourself. Do not self reference.
+Do not explain what you are doing.
+Do not explain what you are going to do.
+Transcript of the call: {text}\n
+Follow-up email:\n"""
+
+    CASESTUDY_PROMPT = """Please ignore all previous instructions.
+Please respond only in the english language.
+You are a customer success professional.
+Based on the provided transcript of a client call that you had, create a case study based on it.
+Do not repeat yourself. Do not self reference.
+Do not explain what you are doing.
+Do not explain what you are going to do.
+Transcript of the call: {text}\n
+Case study:\n"""

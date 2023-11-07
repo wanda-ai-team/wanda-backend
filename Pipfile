@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 langchain = "*"
-openai = "*"
 python-dotenv = "*"
 fastapi = "*"
 uvicorn = "*"
@@ -17,6 +16,12 @@ bs4 = "*"
 youtube-transcript-api = "*"
 pytube = "*"
 moviepy = "*"
+duckduckgo-search = "*"
+google-search-results = "*"
+wikipedia = "*"
+firebase-admin = "*"
+google-cloud-firestore = "*"
+openai = "<1.0.0"
 
 [dev-packages]
 

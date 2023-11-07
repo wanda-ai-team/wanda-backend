@@ -12,48 +12,13 @@ import requests
 # import PyPDF2
 from io import BytesIO
 from zipfile import ZipFile
-
+from langchain.chat_models import ChatOpenAI
+import json
 class SummarizationTool(LlmTools):
     def main(self, userText, config):
-        # text_splitter =  CharacterTextSplitter(chunk_size=3000)
-
-        if (userText.startswith("http")):
-            fileType = userText.split("_-_-")[1]
-            fileURL = userText.split("_-_-")[0]
-            print(fileType)
-            if ("pdf" in fileType):
-                response = requests.get(fileURL)
-                my_raw_data = response.content
-                # with BytesIO(my_raw_data) as data:
-                #     read_pdf = PyPDF2.PdfReader(data)
-
-                #     print(len(read_pdf.pages))
-                #     message = ""
-                #     for page in range(len(read_pdf.pages)):
-                #         message = message + read_pdf.pages[page].extract_text()
-            elif ("text" in fileType):
-                message = ""
-                for line in urllib.request.urlopen(fileURL):
-                    message = message + line.decode('utf-8')
-            elif ("document" in fileType):
-                message = ""
-                response = requests.get(fileURL)
-                my_raw_data = response.content
-                with BytesIO(my_raw_data) as data:
-                    document = ZipFile(data)
-                    content = document.read('word/document.xml')
-                    word_obj = BeautifulSoup(content.decode('utf-8'))
-                    text_document = word_obj.findAll('w:t')
-                    for t in text_document:
-                        message = message + t.text
-        else:
-            message = userText
+        message = userText
 
         print(message)
-        return message
-        if (message == ""):
-            return "No text found"
-
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1500, chunk_overlap=0, separators=[" ", ",", "\n"]
         )
@@ -62,17 +27,25 @@ class SummarizationTool(LlmTools):
 
         documents = [Document(page_content=texts) for texts in texts]
 
-        prompt_template = """You are a professional writter. I will give you a long text, and you will provide a summary of that text. Your summary should be informattive, factual, in-depth and correctly formatted, covering the most important aspects of the text, this summary will be used to create content for social media like twitter, instagram and others: 
-     {text}
-     SUMMARY: """
+        print("documents")
 
-        PROMPT = PromptTemplate(template=prompt_template,
-                                input_variables=["text"])
-        chain = load_summarize_chain(OpenAI(
-            temperature=0), chain_type="map_reduce", map_prompt=PROMPT, combine_prompt=PROMPT)
-        print(documents)
-        print("chain")
-        content = chain({"input_documents": documents},
-                        return_only_outputs=True)
+        prompt_template = """
+As a professional summarizer, create a concise and comprehensive summary of the provided text, be it an article, post, conversation, or passage, while adhering to these guidelines:
 
+Craft a summary that is detailed, thorough, in-depth, and complex, while maintaining clarity and conciseness.
+
+Incorporate main ideas and essential information, eliminating extraneous language and focusing on critical aspects.
+
+Rely strictly on the provided text, without including external information.
+
+Format the summary in paragraph form for easy understanding.
+
+By following this optimized prompt, you will generate an effective summary that encapsulates the essence of the given text in a clear, concise, and reader-friendly manner.
+
+Text: {text}"""
+
+        PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
+        chain = load_summarize_chain(ChatOpenAI(temperature=0, model="gpt-3.5-turbo"), chain_type="map_reduce", map_prompt=PROMPT, combine_prompt=PROMPT)
+        content = chain({"input_documents": documents}, return_only_outputs=True)
+        print(content.get('output_text'))
         return content.get('output_text')

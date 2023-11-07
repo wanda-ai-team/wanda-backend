@@ -1,5 +1,4 @@
 import os
-import openai
 from llm.RequestModels import AgentRequest
 from llm.agents.textAgents.IdeationAgent import IdeationAgent
 from llm.agents.textAgents.ResearchAgent import ResearchAgent
@@ -7,7 +6,6 @@ from fastapi import APIRouter
 
 agentsRouter = APIRouter()
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 
@@ -22,7 +20,7 @@ def ideas(agentRequest: AgentRequest):
     return answer
     
 @agentsRouter.post("/research")
-def ideas(agentRequest: AgentRequest):
+def research(agentRequest: AgentRequest):
     agent = ResearchAgent()
     answer = agent.main(agentRequest.userPrompt, agentRequest.systemPrompt, agentRequest.config)
     return answer

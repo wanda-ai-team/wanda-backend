@@ -1,6 +1,5 @@
 from llm.llmTools.LlmTools import LlmTools
 from langchain.prompts import PromptTemplate
-from langchain.chains.summarize import load_summarize_chain
 from langchain.llms import OpenAI
 from llm.llmTools.textTools.tools.ToolsPrompt import Prompt
 from langchain.chains import LLMChain

@@ -12,6 +12,7 @@ class Config(BaseModel):
     company: str | None = None
     typeOfContent: str | None = None
     url: str | None = None
+    gongCallId: str | None = None
 
 class LlmRequest(BaseModel):
     userPrompt: T | None = None

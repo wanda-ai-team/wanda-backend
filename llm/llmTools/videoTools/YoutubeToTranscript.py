@@ -1,6 +1,5 @@
 import tempfile
 import os
-import openai
 from collections import namedtuple
 from llm.llmTools.LlmTools import LlmTools
 from langchain.text_splitter import  RecursiveCharacterTextSplitter
