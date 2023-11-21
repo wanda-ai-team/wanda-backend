@@ -19,8 +19,6 @@ async def hello():
 application.include_router(agentsRouter, prefix="/agents", dependencies=[Depends(get_api_key)])
 application.include_router(llmToolsRouter, prefix="/llmTools", dependencies=[Depends(get_api_key)])
 application.include_router(mainRouter, prefix="/main", dependencies=[Depends(get_api_key)])
-# Setting debug to True enables debug output. This line should be
-# removed before deploying a production app.
 
 cred = credentials.Certificate({
     "type": os.environ.get("FIREBASE_TYPE"),
@@ -39,7 +37,5 @@ firebase_admin.initialize_app(cred)
 
 # run the app.
 if __name__ == "__main__":
-
-    
     application.debug = True
     uvicorn.run(application)

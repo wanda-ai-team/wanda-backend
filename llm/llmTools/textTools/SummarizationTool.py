@@ -45,7 +45,7 @@ By following this optimized prompt, you will generate an effective summary that 
 Text: {text}"""
 
         PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
-        chain = load_summarize_chain(ChatOpenAI(temperature=0, model="gpt-3.5-turbo"), chain_type="map_reduce", map_prompt=PROMPT, combine_prompt=PROMPT)
+        chain = load_summarize_chain(ChatOpenAI(temperature=0, model="gpt-4-1106-preview"), chain_type="map_reduce", map_prompt=PROMPT, combine_prompt=PROMPT)
         content = chain({"input_documents": documents}, return_only_outputs=True)
         print(content.get('output_text'))
         return content.get('output_text')

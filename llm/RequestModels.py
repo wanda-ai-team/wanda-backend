@@ -13,13 +13,14 @@ class Config(BaseModel):
     typeOfContent: str | None = None
     url: str | None = None
     gongCallId: str | None = None
+    videoId: str | None = None
 
 class LlmRequest(BaseModel):
-    userPrompt: T | None = None
+    userPrompt: T | None = None # type: ignore
     systemPrompt: str | None = None
     config: Config | None = None
 
 class AgentRequest(BaseModel):
-    userPrompt: T | None = None
+    userPrompt: T | None = None # type: ignore
     systemPrompt: str | None = None
     config: str | None = None

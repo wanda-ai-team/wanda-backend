@@ -21,7 +21,11 @@ google-search-results = "*"
 wikipedia = "*"
 firebase-admin = "*"
 google-cloud-firestore = "*"
-openai = "<1.0.0"
+openai = "*"
+install = "*"
+pygame = "*"
+ffmpeg = "*"
+youtube-dl = "*"
 
 [dev-packages]
 

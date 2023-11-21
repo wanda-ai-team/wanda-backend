@@ -4,10 +4,8 @@ from enum import Enum
 class Prompt(Enum):
     TWITTER_THREAD_PROMPT = """Please ignore all previous instructions. 
 Please respond only in the english language.
-You are a Twitter Creator with a large fan following. 
-You have a {tone} tone of voice.
-You have a {writing} writing style.
-Create a Twitter thread on the topic of the summary.
+You are a Twitter Creator with a large fan following.
+Create a Twitter thread based on the given client call transcript.
 There should be around 5 to 8 tweets.
 The first tweet should have a hook and entice the readers.
 The last tweet should have a small summary of the thread.
@@ -17,15 +15,13 @@ Do not repeat yourself.
 Do not self reference.
 Do not explain what you are doing.
 Do not explain what you are going to do.
-Summary: {text}\n
+Transcript of the call: {text}\n
 Twitter Thread:\n"""
 
     LINKEDIN_POST_PROMPT = """Please ignore all previous instructions. 
 Please respond only in the english language.
 You are a LinkedIn creator with a large fan following. 
-You have a {tone} tone of voice.
-You have a {writing} writing style.
-Create a LinkedIn post on the topic of the summary.
+Create a LinkedIn post based on the given client call transcript.
 Start the post with a hook and entice the readers.
 Talk in-depth of the topic on the post.
 End with a small summary of the post.
@@ -34,14 +30,23 @@ Do not repeat yourself.
 Do not self reference.
 Do not explain what you are doing.
 Do not explain what you are going to do.
-Summary: {text}\n
+Transcript of the call: {text}\n
 Linkedin Post:\n"""
 
+    LANDING_COPY_PROMPT = """Please ignore all previous instructions. 
+Please respond only in the english language.
+You are a professional designer.
+Create a copy for a landing page based on the given client call transcript.
+Do not repeat yourself.
+Do not self reference.
+Do not explain what you are doing.
+Do not explain what you are going to do.
+Transcript of the call: {text}\n
+Landing Page Copy:\n"""
+
     BLOG_POST_PROMPT = """Please respond only in the english language.
-You are a Blogger with a large fan following. 
-You have a {tone} tone of voice.
-You have a {writing} writing style.
-Create a SEO optimized blog post on the topic of the summary.
+You are a Blogger with a large fan following.
+Create a SEO optimized blog post based on the given client call transcript.
 Start the post with a hook and entice the readers.
 Talk in-depth of the topic on the post.
 End with a small summary of the post.
@@ -51,7 +56,7 @@ Do not repeat yourself.
 Do not self reference.
 Do not explain what you are doing.
 Do not explain what you are going to do.
-Summary: {text}\n
+Transcript of the call: {text}\n
 Blog Post:\n"""
 
     INSTAGRAM_POST_PROMPT = """Please ignore all previous instructions.
@@ -107,3 +112,26 @@ Do not explain what you are doing.
 Do not explain what you are going to do.
 Transcript of the call: {text}\n
 Case study:\n"""
+
+    SCRAPING_PROMPT = """
+This is the copy of a landing page for a product: {text}. Write a short description of the product and the target audience of it.
+Don't forget to always put product descriptions and target audience.
+Provide a RFC8259 compliant JSON response following this format without deviation.
+product: product description, target_audience: target audience of the product 
+"""
+
+    SUMMARY_PROMPT = """
+As a professional summarizer, create a concise and comprehensive summary of the provided text, be it an article, post, conversation, or passage, while adhering to these guidelines:
+Craft a summary that is detailed, thorough, in-depth, and complex, while maintaining clarity and conciseness.
+Incorporate main ideas and essential information, eliminating extraneous language and focusing on critical aspects.
+Rely strictly on the provided text, without including external information.
+Format the summary in paragraph form for easy understanding.
+By following this optimized prompt, you will generate an effective summary that encapsulates the essence of the given text in a clear, concise, and reader-friendly manner.
+Text: {text}
+"""
+
+    ANSWER_QUESTION_PROMPT = """
+You are a professional on the sales area, you are one of the best people on the field.
+Asnwer the following question about sales with the best of your knowledge.
+Question: {test}
+"""

@@ -3,6 +3,7 @@ from llm.RequestModels import LlmRequest
 from llm.llmTools.textTools.EmbedTool import EmbedTool
 from llm.llmTools.textTools.GetEmbeddedContent import GetEmbeddedContent
 from llm.llmTools.textTools.OutputContentTool import OutputContentTool
+from llm.llmTools.textTools.TranscribeYoutube import TranscribeYoutube
 from llm.llmTools.textTools.VectorDBQueryTool import VectorDBQueryTool
 from llm.llmTools.textTools.SummarizationTool import SummarizationTool
 from fastapi import APIRouter, Depends
@@ -18,19 +19,19 @@ def test():
     return 'answer'
 
 @llmToolsRouter.post("/summarize")
-def summarize(llmRequest: LlmRequest):
+def summarize(llmRequest: LlmRequest = None):  # type: ignore
     tool = SummarizationTool()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
 
 @llmToolsRouter.post("/textToPost")
-def textToPost(llmRequest: LlmRequest):
+def textToPost(llmRequest: LlmRequest = None):  # type: ignore
     tool = TextToSocialMediaTool()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
 
 @llmToolsRouter.post("/youtubeToTranscript")
-def youtubeToTranscript(llmRequest: LlmRequest):
+def youtubeToTranscript(llmRequest: LlmRequest = None):  # type: ignore
     tool = YoutubeToTranscript()
     answer = tool.main(llmRequest.config)
     return answer
@@ -58,3 +59,13 @@ def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
     tool = OutputContentTool()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
+
+
+@llmToolsRouter.post("/transcribeYoutube")
+def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
+    tool = TranscribeYoutube()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+
+

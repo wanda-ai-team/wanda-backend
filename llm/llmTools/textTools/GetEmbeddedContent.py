@@ -35,6 +35,8 @@ class GetEmbeddedContent(LlmTools):
             index_name = os.getenv("PINECONE_INDEX")
             score = False
 
+            print("olaaa")
+
             docsearch = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings)
             # index = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings, text_key="joao.airesmatos@gmail.com-website")
 
