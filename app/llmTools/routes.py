@@ -1,5 +1,6 @@
 import os
 from llm.RequestModels import LlmRequest
+from llm.llmTools.textTools.AnswerQuestion import AnswerQuestionTool
 from llm.llmTools.textTools.EmbedTool import EmbedTool
 from llm.llmTools.textTools.GetEmbeddedContent import GetEmbeddedContent
 from llm.llmTools.textTools.OutputContentTool import OutputContentTool
@@ -66,6 +67,15 @@ def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
     tool = TranscribeYoutube()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
+
+@llmToolsRouter.post("/answerQuestionTool")
+def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
+    tool = AnswerQuestionTool()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+
+
 
 
 

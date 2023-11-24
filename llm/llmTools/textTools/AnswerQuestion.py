@@ -8,7 +8,7 @@ from firebase_admin import firestore
 import langchain
 import openai
 
-class OutputContentTool(LlmTools):
+class AnswerQuestionTool(LlmTools):
     def main(self, userText, config):
 
         text = userText
