@@ -26,6 +26,8 @@ install = "*"
 pygame = "*"
 ffmpeg = "*"
 youtube-dl = "*"
+fastapi-async-langchain = "*"
+faiss-gpu = "*"
 
 [dev-packages]
 

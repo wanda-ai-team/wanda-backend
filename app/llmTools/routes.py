@@ -1,7 +1,11 @@
 import os
 from llm.RequestModels import LlmRequest
+from llm.llmTools.streamTools.StreamChat import StreamChatTool
 from llm.llmTools.textTools.AnswerQuestion import AnswerQuestionTool
+from llm.llmTools.textTools.AnswerQuestionRAG import AnswerQuestionRAGTool
 from llm.llmTools.textTools.EmbedTool import EmbedTool
+from llm.llmTools.textTools.EmbedVectorDBTool import EmbedVectorDBTool
+from llm.llmTools.textTools.EmbedVectorFAISSTool import EmbedVectorFAISSTool
 from llm.llmTools.textTools.GetEmbeddedContent import GetEmbeddedContent
 from llm.llmTools.textTools.OutputContentTool import OutputContentTool
 from llm.llmTools.textTools.TranscribeYoutube import TranscribeYoutube
@@ -63,17 +67,44 @@ def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
 
 
 @llmToolsRouter.post("/transcribeYoutube")
-def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
+def getTranscribeYoutube(llmRequest: LlmRequest = None): # type: ignore
     tool = TranscribeYoutube()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
 
 @llmToolsRouter.post("/answerQuestionTool")
-def getOutputContent(llmRequest: LlmRequest = None): # type: ignore
+def getAnswerQuestionTool(llmRequest: LlmRequest = None): # type: ignore
     tool = AnswerQuestionTool()
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
 
+@llmToolsRouter.post("/streamChat")
+def getStreamChat(llmRequest: LlmRequest = None): # type: ignore
+    tool = StreamChatTool()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+@llmToolsRouter.post("/embedVectorDBTool")
+def getEmbedVectorDBTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = EmbedVectorDBTool()
+    print(llmRequest.userPrompt)
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+@llmToolsRouter.post("/answerQuestionRAGTool")
+def getAnswerQuestionRAGTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = AnswerQuestionRAGTool()
+    print(llmRequest.userPrompt)
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+@llmToolsRouter.post("/embedVectorFAISSTool")
+def getEmbedVectorFAISSTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = EmbedVectorFAISSTool()
+    print("llmRequest.userPrompt")
+    print(llmRequest.userPrompt)
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
 
 
 
