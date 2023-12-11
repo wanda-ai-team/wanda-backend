@@ -17,5 +17,6 @@ COPY ./tools /wanda-backend/tools
 COPY ./common /wanda-backend/common
 COPY ./output /wanda-backend/output
 COPY ./application.py /wanda-backend/application.py
+COPY ./faiss_index /wanda-backend/faiss_index
 #
 CMD ["uvicorn", "application:application", "--host", "0.0.0.0", "--port", "8080"]

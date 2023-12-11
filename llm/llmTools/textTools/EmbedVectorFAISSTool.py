@@ -27,7 +27,7 @@ class EmbedVectorFAISSTool(LlmTools):
                 book_texts[i].metadata["title"] = config.inputDocTitle
 
             db = FAISS.from_documents(book_texts, embed_model)
-            db.save_local("faiss_index")
+            db.save_local("/wanda-backend/faiss_index")
 
             return "success"
         except Exception as error:

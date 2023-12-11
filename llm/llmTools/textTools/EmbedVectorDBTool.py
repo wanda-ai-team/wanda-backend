@@ -77,7 +77,7 @@ class EmbedVectorDBTool(LlmTools):
             print("Indexing documents...")
             print(docsearch)
 
-            return ""
+            return "success"
 
         except Exception as error:
             # handle the exception

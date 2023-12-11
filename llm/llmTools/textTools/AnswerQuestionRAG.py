@@ -27,29 +27,57 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 class AnswerQuestionRAGTool(LlmTools):
     def main(self, userText, config): 
-        embed_model = OpenAIEmbeddings()
+        try:
+            try:
+                print("entered")
+                # new_db = FAISS.load_local("/wanda-backend/faiss_index", embed_model)
+                embeddings = OpenAIEmbeddings()
+                index_name = os.getenv("PINECONE_INDEX")
 
-        new_db = FAISS.load_local("faiss_index", embed_model)
+                pinecone.init(
+                    api_key=os.getenv("PINECONE_API_KEY"),  # find at app.pinecone.io
+                    # next to api key in console
+                    environment=os.getenv("PINECONE_ENV"),
+                )
+                vectordb = Pinecone.from_existing_index(
+                    index_name=index_name,
+                    embedding=embeddings,
+                )
+                retriever = vectordb.as_retriever()
+            
+            except Exception as error:
+                # handle the exception
+                print("An exception occurred:", error) # An exception occurred: division by zero
+                retriever = ""
 
-        retriever = new_db.as_retriever()
+            print("retrieved")
 
-        template = """Answer the question based only on the following context:
-        {context}
+            template = """Answer the question based only on the following context:
+            {context}
 
-        Question: {question}
-        """
-        prompt = ChatPromptTemplate.from_template(template)
+            Question: {question}
+            """
 
-        model = ChatOpenAI(temperature=0, model="gpt-4-1106-preview" )
+            print("template")
+            print(template)
+            print(userText)
+            prompt = ChatPromptTemplate.from_template(template)
 
-        chain = (
-            {"context": retriever, "question": RunnablePassthrough()}
-            | prompt
-            | model
-            | StrOutputParser()
-        )
+            model = ChatOpenAI(temperature=0, model="gpt-4-1106-preview" )
+            print("ola")
+            print(retriever)
+            chain = (
+                {"context": retriever, "question": RunnablePassthrough()}
+                | prompt
+                | model
+                | StrOutputParser()
+            )
 
-        content = chain.invoke(userText)
+            content = chain.invoke(userText)
 
 
-        return content
+            return content
+        except Exception as error:
+            # handle the exception
+            print("An exception occurred:", error) # An exception occurred: division by zero
+            raise HTTPException(status_code=500, detail="Backend error")
