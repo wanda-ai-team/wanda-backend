@@ -133,5 +133,8 @@ Text: {text}
     ANSWER_QUESTION_PROMPT = """
 You are a professional on the sales area, you are one of the best people on the field.
 Asnwer the following question about sales with the best of your knowledge.
-Question: {test}
+Question: {text}
+"""    
+    ANSWER_QUESTION_SIMPLE_PROMPT = """
+    {text}
 """

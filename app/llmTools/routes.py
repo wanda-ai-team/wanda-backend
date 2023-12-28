@@ -1,5 +1,7 @@
 import os
 from llm.RequestModels import LlmRequest
+from llm.llmTools.assistant.AssistantCreation import AssistantCreationTool
+from llm.llmTools.assistant.AssistantCreationWithGoogle import AssistantCreationWithGoogleTool
 from llm.llmTools.streamTools.StreamChat import StreamChatTool
 from llm.llmTools.textTools.AnswerQuestion import AnswerQuestionTool
 from llm.llmTools.textTools.AnswerQuestionRAG import AnswerQuestionRAGTool
@@ -14,6 +16,8 @@ from llm.llmTools.textTools.SummarizationTool import SummarizationTool
 from fastapi import APIRouter, Depends
 
 from llm.llmTools.textTools.TextToSocialMediaTool import TextToSocialMediaTool
+from llm.llmTools.textTools.embed.EmbedToolFirebaseFile import EmbedToolFirebaseFile
+from llm.llmTools.transcription.Transcript import Transcript
 from llm.llmTools.videoTools.YoutubeToTranscript import YoutubeToTranscript
 
 llmToolsRouter = APIRouter()
@@ -75,6 +79,7 @@ def getTranscribeYoutube(llmRequest: LlmRequest = None): # type: ignore
 @llmToolsRouter.post("/answerQuestionTool")
 def getAnswerQuestionTool(llmRequest: LlmRequest = None): # type: ignore
     tool = AnswerQuestionTool()
+    print("entrei")
     answer = tool.main(llmRequest.userPrompt, llmRequest.config)
     return answer
 
@@ -107,6 +112,28 @@ def getEmbedVectorFAISSTool(llmRequest: LlmRequest = None): # type: ignore
     return answer
 
 
+@llmToolsRouter.post("/embed/embedToolFirebaseFile")
+def getEmbedVectorFAISSTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = EmbedToolFirebaseFile()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
 
 
+@llmToolsRouter.post("/assistant/create")
+def getAssistantCreationTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = AssistantCreationTool()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
 
+
+@llmToolsRouter.post("/assistant/createWithGoogle")
+def getAssistantCreationTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = AssistantCreationWithGoogleTool()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer
+
+@llmToolsRouter.post("/transcription/transcribe")
+def getAssistantCreationTool(llmRequest: LlmRequest = None): # type: ignore
+    tool = Transcript()
+    answer = tool.main(llmRequest.userPrompt, llmRequest.config)
+    return answer

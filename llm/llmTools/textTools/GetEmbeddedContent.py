@@ -45,8 +45,8 @@ class GetEmbeddedContent(LlmTools):
             else:
                 similar_docs = docsearch.similarity_search(query, k=2)
 
-            print(similar_docs)
-            return  similar_docs
+            print(similar_docs[0].page_content)
+            return  similar_docs[0].page_content
 
         except:
             raise HTTPException(status_code=404, detail="Item not found")

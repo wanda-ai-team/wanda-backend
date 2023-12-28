@@ -1,9 +1,9 @@
 
+from fastapi.responses import StreamingResponse
 from llm.llmTools.LlmTools import LlmTools
 from langchain import ConversationChain
 from langchain.chat_models import ChatOpenAI
 from pydantic import BaseModel
-from fastapi_async_langchain.responses import StreamingResponse
 from langchain.schema import HumanMessage, SystemMessage
 
 from langchain.chains import LLMChain

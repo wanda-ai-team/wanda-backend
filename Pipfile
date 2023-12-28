@@ -26,8 +26,12 @@ install = "*"
 pygame = "*"
 ffmpeg = "*"
 youtube-dl = "*"
-fastapi-async-langchain = "*"
 faiss-gpu = "*"
+python-docx = "*"
+simplify-docx = "*"
+docx2txt = "*"
+assemblyai = "*"
+slack-sdk = "*"
 
 [dev-packages]
 

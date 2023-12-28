@@ -16,6 +16,9 @@ class Config(BaseModel):
     inputDocTitle: str | None = None
     videoId: str | None = None
     text: str | None = None
+    slackChannel: str | None = None
+    audioUrl: str | None = None
+    slackThreadTs: str | None = None
 
 class LlmRequest(BaseModel):
     userPrompt: T | None = None # type: ignore
